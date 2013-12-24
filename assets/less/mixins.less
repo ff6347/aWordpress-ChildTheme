@@ -1,0 +1,16 @@
+.fancyBorder(){
+  border-style:solid;
+  border-width:1px;
+  border-color: #696969;
+}
+
+.shadow(){
+
+  -moz-box-shadow: @shadowCol;//5px 5px 5px #e2e2e2; /* FF3.5+ */
+  -webkit-box-shadow: @shadowCol;//5px 5px 5px #e2e2e2;/*Saf3+, Chr*/
+  box-shadow: @shadowCol;//5px 5px 5px #e2e2e2; /*Op10.5, IE 9, FF4*/
+  // filter:progid:DXImageTransform.Microsoft.Shadow  ⏎
+  // (color=#e2e2e2, Direction=135, Strength=5); /* IE6-7 */
+   -ms-filter:"progid:DXImageTransform.Microsoft.Shadow  (color=#222222, Direction=180, Strength=3)"; /* IE8 */
+  // zoom:1; /* trigger hasLayout */
+}

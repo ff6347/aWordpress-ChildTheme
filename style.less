@@ -1,0 +1,1207 @@
+/*
+Theme Name:     aWordpressChildTheme
+Theme URI:      http://www.gut-aWordpressChildTheme.de/
+Description:    Child theme for the Twenty Thirteen theme
+Author:         @pdxiii & @fabiantheblind
+Author URI:     http://the-moron.net/
+Template:       twentythirteen
+Version:        0.1.0
+*/
+
+/**
+ * Basic guide to child theme development
+ *
+ */
+
+@import url("assets/css/normalize.css");
+@import url("assets/less/style-2013.less");
+@import url("assets/less/fonts.less");
+@import url("assets/less/elements.less");
+// @import url("assets/font-awesome/less/font-awesome.less");
+// @import url("assets/less/gallery-overwrite.less");
+@import url("assets/less/variables.less");
+@import url("assets/less/mixins.less");
+@import url("assets/less/bg.less");
+
+  //                  _       _     _
+  //                 (_)     | |   | |
+  // __   ____ _ _ __ _  __ _| |__ | | ___  ___
+  // \ \ / / _` | '__| |/ _` | '_ \| |/ _ \/ __|
+  //  \ V / (_| | |  | | (_| | |_) | |  __/\__ \
+  //   \_/ \__,_|_|  |_|\__,_|_.__/|_|\___||___/
+
+
+@lightgrey: #efefef;
+@greenci: #185422;// "CI" Color
+@greendark: #185422;
+
+@imgmargins: 0 0 .75em 0;
+
+@navheight:45px;
+
+
+@colorLight : #BBAE92;
+@colorDark: #4F4D3;
+@colorRed: #AB2430;
+@distelGreen: #3F8242;
+@colorBlack: #1A1919;
+
+
+
+/**
+ * END OF VARIABLES
+ */
+
+//                _      _
+//     ____ ___  (_)  __(_)___  _____
+//    / __ `__ \/ / |/_/ / __ \/ ___/
+//   / / / / / / />  </ / / / (__  )
+//  /_/ /_/ /_/_/_/|_/_/_/ /_/____/
+//
+
+.imgborder(@w : 1px, @color : white){
+      border: solid @w @color;
+
+}
+
+.brushedBG{
+  background:url(assets/images/bg-patterns/brushed/brushed.png) repeat scroll top;
+}
+
+.entryShadow(){
+  -moz-box-shadow:    0px 4px 5px rgba(50, 50, 50, 0.5);
+  -webkit-box-shadow: 0px 4px 5px rgba(50, 50, 50, 0.5);
+  box-shadow:         0px 4px 5px rgba(50, 50, 50, 0.5);
+}
+
+.dropShadow (@color) {
+  -moz-box-shadow:   0px 0px 2px 1px @color;
+  -webkit-box-shadow:0px 0px 2px 1px @color;
+  box-shadow:        0px 0px 2px 1px @color;
+}
+
+.letterPressShadow (@color) {
+    text-shadow: 1px 1px 1px lighten(@color, 15%);
+}
+
+.darkLetterShadow (@color) {
+    text-shadow:  1px 1px 1px darken(@color, 15%);
+}
+
+.commentShadow {
+  box-shadow: 0px 4px 10px -2px @greenci;
+  -moz-box-shadow: 0px 4px 10px -2px @greenci;
+  -webkit-box-shadow: 0px 4px 10px -2px @greenci;
+}
+
+.buttonFX (@color) {
+  background-color: @color;
+  box-shadow: inset 10px 10px 10px lighten(@color, 2%),
+              inset -10px -10px 10px darken(@color, 2%);
+  -webkit-box-shadow: inset 10px 10px 10px lighten(@color, 2%),
+              inset -10px -10px 10px darken(@color, 2%);
+  -moz-box-shadow: inset 10px 10px 10px lighten(@color, 2%),
+              inset -10px -10px 10px darken(@color, 2%);
+}
+
+.upperCaseNavLinks{
+  .callunaSansSemibold;
+  color: @lightgrey;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  hyphens: none;
+}
+
+/**
+ * media queries bubbling
+ */
+
+//mobile first
+@smallScreen:   ~"only screen and (min-width: 540px) and (max-width: 767px)";
+@mediumScreen:  ~"only screen and (min-width: 768px) and (max-width: 1024px)";
+@largeScreen:   ~"only screen and (min-width: 1025px) and (max-width: 1599px)";
+@xlargeScreen:  ~"only screen and (min-width: 1600px)";
+
+
+@retina:  ~"only screen and (-webkit-min-device-pixel-ratio: 2)     ",
+~"only screen and (   min--moz-device-pixel-ratio: 2)     ",
+~"only screen and (     -o-min-device-pixel-ratio: 2/1)   ",
+~"only screen and (        min-device-pixel-ratio: 2)     ",
+~"only screen and (                min-resolution: 192dpi)",
+~"only screen and (                min-resolution: 2dppx) ";
+
+@upright: ~"(orientation: portrait)";
+
+@laylow:  ~"(orientation: landscape)";
+/**
+ * END OF BUBBLING
+ */
+
+
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+ }
+
+html,
+body {
+   height:100%;
+}
+
+#page{
+  min-height:100%;
+  position:relative;
+}
+
+ html,
+ button,
+ input,
+ select,
+ textarea,
+ p {
+  .calluna; // !!!
+  color: @greendark;
+}
+
+p, li{
+  @media @largeScreen,
+  @xlargeScreen{
+    font-size: 1.1em;
+  }
+}
+
+li{
+  li{
+    font-size: 1em;
+  }
+}
+
+h1,
+h2,
+h3,
+h3.comment-reply-title,
+h4,
+h5,
+h6 {
+  .callunaBold;
+}
+
+a{
+  .callunaSemibold; // !!!
+  color: @greenci;
+}
+
+body{
+  background-color:@lightgrey;
+  padding-top: @navheight;
+  color: @greendark;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+}
+
+.site{
+  background-color: transparent;
+}
+
+
+.home-link{
+  position: relative;
+  z-index: 20;
+
+  background-color: @lightgrey;
+  .brushedBG;
+  padding: 0;
+  img.brand.distel{
+
+    display: block;
+    float: top;
+    position: absolute;
+    left: 50%;
+    width: 250px;
+    margin-left: -125px;
+    top: -0.5em;
+    @media @mediumScreen, @largeScreen {
+    }
+    @media @xlargeScreen{
+    }
+  }
+}
+
+// css for background drop shadow
+article, #masthead{
+  .entryShadow;
+}
+
+#masthead, #primary{
+  position: relative;
+  z-index: 2000;
+}
+
+// this makes the header smaller
+.site-header .home-link{
+  min-height: 200px;
+  padding: 0 0;
+}
+/*
+  this is deprecated:
+
+
+  .brand-label {
+    top: 4em;  //!!!
+    padding-top: 1em;
+    overflow: hidden;
+    .site-title{
+      color: @greenci;
+      font-size: 1.3em;
+      .callunaBold;
+      .letterPressShadow(@lightgrey);
+
+      @media @mediumScreen,
+      @largeScreen,
+      @xlargeScreen{
+        font-size: 2em;
+      }
+    }
+
+    .site-description{
+      color: @greenci;
+      font-size: 1.8em;
+      .calluna;
+      .letterPressShadow(@greendark);
+
+      @media @mediumScreen,
+      @largeScreen,
+      @xlargeScreen{
+        font-size: 4em;
+      }
+    }
+  }
+*/
+
+/*********************************
+ * HEADER
+ *********************************/
+
+
+/*********************************
+ * NAVIGATION
+ *********************************/
+
+.main-navigation {
+  clear: both;
+  margin: 0 auto;
+  max-width: 960px;
+  min-height: 45px;
+  position: relative;
+
+}
+
+.navbar{
+    border-bottom: solid 1px @lightgrey;
+}
+
+ul.nav-menu,
+div.nav-menu > ul {
+  display: none;
+
+  @media
+  @largeScreen,
+  @xlargeScreen{
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.nav-menu li {
+  display: inline-block;
+  position: relative;
+}
+
+.nav-menu li a {
+  .upperCaseNavLinks;
+  display: block;
+  font-size: 14px;
+  line-height: 1;
+  padding: 10px 20px;
+  text-decoration: none;
+  -webkit-hyphens: none;
+
+  @media
+  @largeScreen,
+  @xlargeScreen{
+    padding: 15px 20px;
+  }
+}
+
+.nav-menu li:hover > a,
+.nav-menu li a:hover {
+  background-color: @lightgrey;
+  color: @greenci;
+}
+
+.nav-menu .sub-menu,
+.nav-menu .children {
+  background-color: @greenci;
+  border-top: 0;
+  display: none;
+  padding: 0;
+  position: absolute;
+  z-index: 2999;
+}
+
+.nav-menu .sub-menu ul,
+.nav-menu .children ul {
+  border-left: 0;
+  left: 100%;
+  top: 0;
+
+  li > a{
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+}
+
+ul.nav-menu ul a,
+.nav-menu ul ul a {
+  color: @lightgrey;
+  margin: 0;
+  width: 200px;
+}
+
+ul.nav-menu ul a:hover,
+.nav-menu ul ul a:hover {
+  background-color: @lightgrey;
+
+}
+
+ul.nav-menu li:hover > ul,
+.nav-menu ul li:hover > ul {
+
+  display: block;
+  z-index: 2999;
+
+}
+
+.nav-menu .current_page_item > a,
+.nav-menu .current_page_ancestor > a,
+.nav-menu .current-menu-item > a,
+.nav-menu .current-menu-ancestor > a {
+  color: @lightgrey;
+  text-decoration: underline;
+}
+
+.menu-toggle {
+  cursor: pointer;
+  display: inline-block;
+  margin: 0;
+  padding: 12px 0 12px 20px;
+  .upperCaseNavLinks;
+
+  @media
+  @largeScreen,
+  @xlargeScreen{
+    display: none;
+  }
+}
+
+.menu-toggle:after {
+  content: "\f502";
+  font-size: 12px;
+  padding-left: 8px;
+  vertical-align: -4px;
+
+  @media
+  @largeScreen,
+  @xlargeScreen{
+    display: none;
+  }
+}
+
+.toggled-on .menu-toggle:after {
+  content: "\f500";
+  vertical-align: 2px;
+}
+
+.toggled-on .nav-menu,
+.toggled-on .nav-menu > ul {
+  display: block;
+  margin-left: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.toggled-on li,
+.toggled-on .children {
+  display: block;
+}
+
+.toggled-on .nav-menu li > ul {
+  background-color: transparent;
+  display: block;
+  float: none;
+  margin-left: 20px;
+  position: relative;
+  left: auto;
+  top: auto;
+}
+
+.toggled-on .nav-menu li > ul a {
+  width: auto;
+}
+
+.navbar {
+  width: 100%;
+  position:absolute;
+  background-color:@greenci;
+  top: -45px;
+  z-index: 5000;
+  .callunaSans;
+  .dropShadow(@greendark);
+
+  @media @mediumScreen,
+  @largeScreen,
+  @xlargeScreen{
+    position:fixed;
+    top: 0;
+    height: auto;
+  }
+}
+
+// fixing hyperlink colors
+.entry-content a,
+.comment-content a ,
+.entry-content a:hover,
+.comment-content a:hover,
+.comment-reply-link {
+  color: @greenci;
+}
+
+
+
+.site{
+   // background:url(assets/images/big-bg/gut-sw.png) no-repeat fixed center top;
+ // background-position:center top;
+ //    background-attachment:fixed;
+
+}
+
+
+.welcome-bg{
+  // background:url(assets/images/big-bg/gut-sw.png) no-repeat fixed center top;
+
+}
+.angebot-bg{
+  background:url(assets/images/big-bg/gut-sw.png) no-repeat fixed center top;
+}
+.unterkuenfte-bg{
+  background:url(assets/images/big-bg/unterkuenfte-sw.png) no-repeat fixed center top;
+}
+.bednbread-bg{
+  background:url(assets/images/big-bg/gut-sw.png) no-repeat fixed center top;
+}
+.info-bg{
+  background:url(assets/images/big-bg/gut-sw.png) no-repeat fixed center top;
+}
+.kontakt-bg{
+  background:url(assets/images/big-bg/kontakt-sw.png) no-repeat fixed center top;
+}
+.default-bg{
+  background:url(assets/images/big-bg/gut-sw.png) no-repeat fixed center top;
+}
+
+
+
+.site-main{
+
+  // background:url(assets/images/bg-patterns/wild_flowers/wild_flowers.png) repeat;
+
+}
+
+// allover margins
+#masthead,
+#primary,
+.main-navigation,
+// .site-header .home-link,
+// .menu-menue-1-container,
+// .entry-header,
+// .entry-content,
+// .entry-summary,
+// .entry-meta,
+.comments-area {
+  margin: 0 auto;
+  max-width: 960px;  //!!!
+  width: 90%;  //!!!
+  padding-left: 0;
+  @media
+  @xlargeScreen{
+
+    width: 80%;
+  }
+}
+
+
+
+
+/************************
+ *  //!!!
+ *************************/
+.entry-content{
+  .brushedBG;
+  // background-color: @lightgrey;
+  // border-left: solid 1px @lightgrey;
+  // border-right: solid 1px @lightgrey;
+  padding: 2em;
+
+  img{
+  .imgborder(3px, @lightgrey);
+    margin-top: 0px !important;
+    // .fancyBorder;
+    .shadow;
+  }
+
+  img.alignleft{
+    width: 100%;
+    margin: 1em 0 1em;
+      @media @smallScreen,
+      @mediumScreen,
+      @largeScreen,
+      @xlargeScreen{
+      width: auto;
+      margin: 1em 1em 1em 0;
+    }
+  }
+  img.alignright{
+    width: 100%;
+    margin: 1em auto 1em;
+      @media @smallScreen,
+      @mediumScreen,
+      @largeScreen,
+      @xlargeScreen{
+      width: auto;
+      margin: 1em 0 1em 1em;
+    }
+
+  }
+  img.aligncenter {
+    width: 100%;
+    margin: 1em auto 1em;
+      @media @smallScreen,
+      @mediumScreen,
+      @largeScreen,
+      @xlargeScreen{
+      width: auto;
+      // margin: 1em 0 1em 1em;
+    }
+  }
+
+  @media @smallScreen,
+  @mediumScreen,
+  @largeScreen,
+  @xlargeScreen{
+    p:first-child{
+      font-size: 1.4em;
+    }
+  }
+  blockquote{
+    font-size: 1em;
+    padding:0 4em;
+    margin: 24px 0;
+    p{
+      .callunaItalic;
+      margin: -1em 0 1.5em;
+      display: block;
+    }
+  }
+  blockquote:before{
+    content:"„";
+    color: @greenci;
+    font-size: 6em;
+    display: block;
+    line-height: 24px;
+    position: relative;
+    top: -.1em;
+    left: -.35em;
+    .callunaSemibold;
+  }
+}
+.hentry{
+  padding:0;
+}
+
+/************************
+ *  //!!!END
+ *************************/
+
+
+
+// .entry-content{
+//   img.alignleft{
+//     // display: block;
+//     width: 100%;
+//     margin: 0 auto 1em;
+//       @media @mediumScreen, @largeScreen, @xlargeScreen{
+//       width: auto;
+//       margin-right: 1em;
+//       margin-left: 0;
+//       margin-bottom: 0;
+
+//     }
+//   }
+//   img.alignright{
+//     // display: block;
+//     width: 100%;
+//     margin: 0 auto 1em;
+//       @media @mediumScreen, @largeScreen, @xlargeScreen{
+//       width: auto;
+//       margin-left: 1em;
+//       margin-right: 0;
+//       margin-bottom: 0;
+//     }
+//   }
+// }
+
+// .entry-content{
+//   img.alignleft{
+//     width: 100%;
+//     margin: 1em 0 1em;
+//       @media @smallScreen, @mediumScreen, @largeScreen, @xlargeScreen{
+//       width: auto;
+//       margin: 1em 1em 1em 0;
+//     }
+//   }
+//   img.alignright{
+//     width: 100%;
+//     margin: 1em auto 1em;
+//       @media @smallScreen, @mediumScreen, @largeScreen, @xlargeScreen{
+//       width: auto;
+//       margin: 1em 0 1em 1em;
+//     }
+//   }
+// }
+
+.entry-content > *,
+.comments-area > * {
+  width: 100% ;
+  max-width: none ;
+
+}
+
+
+/**
+ * Post images used by subpage_peek
+ */
+
+
+.wp-post-image,
+.wp-image-424{
+
+        .shadow;
+}
+/******************************************
+ * PAGE EXCERPT
+ ******************************************/
+
+ul.page-excerpt{
+  padding: 0;
+  list-style-type: none;
+
+  p{
+    font-size: 1em;
+  }
+  a{
+    float: right;
+  }
+  li{
+    img{
+      float: left;
+      margin: @imgmargins;
+
+    }
+  }
+  @media @mediumScreen,
+  @largeScreen,
+  @xlargeScreen{
+
+    li{
+      float: left;
+      margin-top: 1em;
+      width: 47%;
+    }
+    li:nth-child(odd) {
+      margin-right: 5%;
+    }
+  }
+}
+
+.houses{
+  position: relative;
+  list-style: none;
+  padding: 0;
+
+  @media @mediumScreen,
+  @largeScreen,
+  @xlargeScreen{
+    .house{
+      float: left;
+      margin: 1em 2% 1em 0;
+      width: 32%;
+    }
+    .house:nth-child(3) {
+      margin-right: 0;
+    }
+  }
+  .house{
+    position: relative;
+    padding-bottom: 1em;
+    margin-bottom: 1.5em;
+    background-color: @greenci;
+    .commentShadow;
+
+    .house-headline{
+      margin-top: 0;
+      position: absolute;
+      top: 0;
+      padding: .5em 0;
+      width: 100%;
+      text-align: center;
+      display: block;
+      color: @lightgrey;
+      font-size: 1.5em;
+      .calluna;
+      border-bottom: solid 3px @greenci;
+      background-color: rgba(63, 71, 37, 0.7);
+    }
+
+    .house-image{
+      border: none;
+      // box-shadow: none;
+      height: 16em;
+      width: 100%;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      box-shadow: inset 0 0 5px 1px #333;
+    }
+
+    .house-excerpt{
+      .callunaSansLight;
+      border-top: solid 3px @greenci;
+      color: @lightgrey;
+      padding: 1em;
+      text-align: left; // on fabiantheblind's demand
+      margin-bottom: 2.5em;
+
+      @media @mediumScreen{
+        height: 220px;
+        font-size: .8em;
+        letter-spacing: .1em;
+        margin-bottom: 0;
+      }
+
+      @media @largeScreen,
+      @xlargeScreen{
+        height: 250px;
+        font-size: .8em;
+        letter-spacing: .1em;
+        margin-bottom: 0;
+      }
+    }
+
+    a{
+      position: absolute;
+      bottom: 1em;
+      right: 1em;
+      float: right;
+      color: white;
+      letter-spacing: .1em;
+      .callunaSansLight;
+
+      @media @mediumScreen,
+      @largeScreen,
+      @xlargeScreen{
+        bottom: 0.5em;
+      }
+    }
+  }
+}
+
+
+
+
+
+/************************
+ * CONTACT FORM
+ **********************/
+
+ // input.wpcf7-form-control{
+
+ // }
+
+  input[type="text"].wpcf7-form-control,
+  input[type="email"].wpcf7-form-control,
+   input[type="url"].wpcf7-form-control,
+ textarea.wpcf7-form-control {
+      width: 100%;
+      max-width: 500px;
+      background: @lightgrey;
+      // background: transparent;
+      // border: solid 1px @greenci;
+      border: none;
+      border-radius: 2px;
+      border-bottom: solid 1px @greenci;
+      }
+
+                                               // __
+    // _________  ____ ___  ____ ___  ___  ____  / /______
+   // / ___/ __ \/ __ `__ \/ __ `__ \/ _ \/ __ \/ __/ ___/
+  // / /__/ /_/ / / / / / / / / / / /  __/ / / / /_(__  )
+  // \___/\____/_/ /_/ /_/_/ /_/ /_/\___/_/ /_/\__/____/
+
+/**
+* Comments styling for guestbook
+*/
+
+.comments-area{
+  overflow: hidden;
+  padding-bottom: 4em;
+
+  .comment-list{
+    width: 98%;
+    margin: auto;
+
+    @media @mediumScreen,
+    @largeScreen,
+    @xlargeScreen{
+      float: left;
+      width: 47%;
+      // padding:0 1em;
+      margin-right: 4%;
+      margin-left: 1%;
+    }
+
+    .comment{
+      background-image: url(assets/images/bg-patterns/light_noise_diagonal/light_noise_diagonal-lightgrey.png);
+      background-repeat:repeat;
+      .commentShadow;
+      padding:0 1em;
+      margin-bottom: 1em;
+
+      .comment-author{
+
+      }
+      .comment-metadata{
+
+      }
+      // .comment-content > p{
+      //   p{
+      //     .callunaItalic;
+      //   }
+      // }
+      .reply{
+        a{
+          // float: right;
+        }
+      }
+    }
+  }
+
+  b.fn{
+    color: @greenci;
+  }
+
+  .comment-author{
+    a{
+      .callunaSansSemibold;
+      color: @greenci;
+    }
+  }
+  .comment-respond{
+    background-color: @lightgrey;
+
+    padding:0 1em;
+    width: 98%;
+    margin: auto;
+    overflow: hidden;
+
+    @media @mediumScreen,
+    @largeScreen,
+    @xlargeScreen{
+      float: left;
+      width: 47%;
+    }
+
+    a{
+      color: @greenci;
+    }
+    .comment-reply-title{
+      margin-top: 24px;
+    }
+
+    input[type = "submit"]{
+      float: right;
+      margin-bottom: 1em;
+    }
+    .comment-notes, label{
+      display: none;
+    }
+
+    .comment-form input[type="text"],
+    .comment-form input[type="email"],
+    .comment-form input[type="url"],
+    .comment-form textarea {
+      width: 100%;
+      max-width: 500px;
+      // background: @lightgrey;
+      background: transparent;
+      // border: solid 1px @greenci;
+      border: none;
+      border-bottom: solid 1px @greenci;
+      .callunaSansItalic;
+    }
+    .comment-form textarea{
+      border-left: solid 1px @greenci;
+    }
+  }
+}
+.comment-content > p{
+  .callunaItalic;
+  font-size: 1em;
+}
+.comment-reply-link{
+  // float: right;
+  display: none;
+}
+
+/**
+* Buttons
+*/
+
+/* Buttons */
+button,
+input[type="submit"],
+input[type="button"],
+input[type="reset"] {
+  background: @greenci;
+  border: none;
+  border-bottom: 3px solid @greendark;
+  border-radius: 2px;
+  color: @lightgrey;
+  display: inline-block;
+  padding: 11px 24px 10px;
+  text-decoration: none;
+}
+
+button:hover,
+button:focus,
+input[type="submit"]:hover,
+input[type="button"]:hover,
+input[type="reset"]:hover,
+input[type="submit"]:focus,
+input[type="button"]:focus,
+input[type="reset"]:focus {
+  background: @greenci; /* Old browsers */
+  // background: -webkit-linear-gradient(top, #ed6a31 0%, #e55627 100%); /* Chrome 10+, Safari 5.1+ */
+  // background:   linear-gradient(to bottom, #ed6a31 0%, #e55627 100%); /* W3C */
+  outline: none;
+}
+
+button:active,
+input[type="submit"]:active,
+input[type="button"]:active,
+input[type="reset"]:active {
+  background: @greenci; /* Old browsers */
+  border: none;
+  border-top: 3px solid @greendark;
+  padding: 10px 24px 11px;
+}
+
+/******************************************
+ * Footer
+ ******************************************/
+
+/**
+ * Footer styling
+ */
+.site-footer{
+  @callunaSansSemibold;
+  background-color: @greenci;
+
+  position: absolute;
+  z-index: 5000;
+
+  bottom: 0;
+  width: 100%;
+  height: auto; /* Height of the footer */
+  padding: 10px 0; /*paddingtop+bottom 20*/
+  margin-bottom: 0;
+
+  .dropShadow(@greendark);
+  border-top: solid 1px @lightgrey;
+
+  @media @mediumScreen,
+  @largeScreen,
+  @xlargeScreen{
+    position: fixed;
+  }
+
+  a{
+    .upperCaseNavLinks
+
+  }
+}
+
+.footer-workitems-text{
+padding-left: 10px;
+}
+
+
+/**
+ * MAP
+ */
+
+#map_canvas {
+  height: 10*1.5em;
+  position: relative;
+  margin-bottom: 1.5em;
+  // background-color: red;
+
+}
+
+/**
+ * These are some styles that define the blogroll and blog apperance
+ * not wanted by the customer, but you never know
+ *
+ *
+ */
+.post-navigation{
+
+  background-color: @lightgrey;
+}
+
+.nav-links{
+  a{
+   .callunaSansSemibold;
+  color: @greenci;
+  }
+}
+
+.entry-meta{
+  a{
+       .callunaSansSemibold;
+  color: @greenci;
+  }
+}
+
+.gallery{
+  margin-left: 0;
+
+  @media @mediumScreen,
+  @largeScreen,
+  @xlargeScreen{
+    padding-left: 10%;
+  }
+
+}
+
+dl.gallery-item{
+  margin: 0 1em 1em 0;
+  .shadow;
+}
+
+// .viewToggle{
+//   .callunaBold;
+//   font-size: 4em;
+//   color: white;
+//   border: none;
+//   position: fixed;
+//   bottom: 0.25em;
+//   left: 50%;
+//   margin-left: -50px;
+//   background: transparent;
+//   border-radius: 50%;
+//   overflow: hidden;
+//   z-index: 9000;
+
+//   @media @upright{
+//     display: none;
+//   }
+//   &:hover{
+//     background: transparent;
+//     border: none;
+//   }
+// }
+
+
+// css for slideshow on welcome page
+
+.home{
+  height: 100%;
+  #masthead{
+    width: 100%;
+    max-width: none;
+  }
+  #main{
+    .slideshow_description {
+      background: rgba(255,255,255,0.5) !important;
+      width: 100%;
+      top: 30%;
+      opacity: 1;
+      font-size: 1.3em;
+      height: 13em;
+      @media @mediumScreen, @largeScreen {
+        font-size: 2em;
+        height: 11em;
+
+      }
+      @media @xlargeScreen{
+        font-size: 3em;
+      }
+
+      p {
+        width: 80%;
+        text-align: center;
+        margin: 6.5em 10%;
+        display: block;
+        a{
+          -webkit-hyphens: none;
+          -moz-hyphens: none;
+          hyphens: none;
+          .callunaItalic;
+          color: @greenci !important;
+        }
+        :before{
+          background: url('assets/images/Logo_neu4_rgb.png') no-repeat center center;
+          background-size: 100%;
+          content: '';
+          display: block;
+          float: top;
+          position: absolute;
+          left: 50%;
+          top: -1em;
+          width: 10em;
+          height: 10em;
+          margin-left: -5em;
+
+          @media @mediumScreen, @largeScreen, @xlargeScreen{
+            top: -0.5em;
+            width: 8em;
+            height: 8em;
+            margin-left: -4em;
+          }
+        }
+      }
+    }
+    // dont display standard content
+    a.home-link,
+    #primary{
+      display: none;
+    }
+  }
+}

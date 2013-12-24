@@ -1,0 +1,15 @@
+td.inputs {
+  width: 100px;
+}
+.image-wrap {
+  text-align: left;
+}
+.image-wrap img {
+  width: 150px;
+}
+td.infoline {
+  white-space: nowrap;
+}
+input.regular-text {
+  width: 22em;
+}
